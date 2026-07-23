@@ -1,6 +1,6 @@
 name: Push 기반 CI/CD 테스트
 
-# container 브랜치에서 push 이벤트(리슨->on)가 발생되면 아래 설정한 내용이 작동한다!!
+# container 브랜치에서 push 이벤트(리슨->on)가 발생되면 아래 설정한 내용되고 작동한다!!
 on:
   push:
     branches: [ "container" ]
@@ -13,7 +13,7 @@ jobs:
       # 체크아웃, 소스코드를 ci서버에 다운
       - name: 코드 checkout
         uses: actions/checkout@v3
-
+      
       # 도커허브 로그인 -> ID/PW
       # 시크릿 변수로 DOCKER_USERNAME, DOCKER_PASSWORD 생성
       - name: Docker hub login
@@ -21,25 +21,26 @@ jobs:
         with:
           username: ${{ secrets.DOCKER_USERNAME }}
           password: ${{ secrets.DOCKER_PASSWORD }}
-
+      
       # fastapi app 에 대한 이미지 빌드 푸시 동시진행
       - name: Build and Push fastapi app
         uses: docker/build-push-action@v4
-        with: 
-          context:  ./app
+        with:
+          context: ./app
           file: ./app/Dockerfile
           push: true
-          tag:  ${{ secrets.DOCKER_USERNAME }}/fastapi-app:1.0  
+          tags: ${{ secrets.DOCKER_USERNAME }}/fastapi-app:1.0
 
       # 사용자명/nginx-proxy:1.0 형태로 이미지 빌드 -> 푸시
-      - name: Build and Push nginx
+      - name: Build and Push fastapi app
         uses: docker/build-push-action@v4
-        with: 
-          context:  ./nginx
+        with:
+          context: ./nginx
           file: ./nginx/Dockerfile
           push: true
-          tag:  ${{ secrets.DOCKER_USERNAME }}/nginx-proxy:1.0
+          tags: ${{ secrets.DOCKER_USERNAME }}/nginx-proxy:1.0
 
-  # EC2에 docker-compose.yml, 설정파일등 copy, 도커컴포즈 작동      
+  
+  # EC2에 docker-compose.yml, 설정파일등 copy, 도커컴포즈 작동
   #cd:
-
+    
