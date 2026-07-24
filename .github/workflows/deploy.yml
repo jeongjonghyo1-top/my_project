@@ -29,7 +29,7 @@ jobs:
           context:  ./app
           file: ./app/Dockerfile
           push: true
-          tag:  ${{ secrets.DOCKER_USERNAME }}/fastapi-app:1.1  
+          tags:  ${{ secrets.DOCKER_USERNAME }}/fastapi-app:1.1  
 
       # 사용자명/nginx-proxy:1.0 형태로 이미지 빌드 -> 푸시
       - name: Build and Push nginx app
@@ -38,7 +38,7 @@ jobs:
           context:  ./nginx
           file: ./nginx/Dockerfile
           push: true
-          tag:  ${{ secrets.DOCKER_USERNAME }}/nginx-proxy:1.0
+          tags:  ${{ secrets.DOCKER_USERNAME }}/nginx-proxy:1.0
 
   # 실습
   # EC2에 docker-compose.yml, 설정파일등 copy, 
