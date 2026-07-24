@@ -8,9 +8,9 @@
         - 현재 hub.docker.com 활용
         - 차후 AWS ECR 활용
     - EC2 서버에 Docker 설치되어 있어야 함
-        - 도커설치
-        - 스펙상향
-            - t3.micro 인스턴스 유형, 2 cpu 1 Rem, 30 Gib
+        - 도커 설치
+        - 스펙 상향
+            - t3.micro  인스턴스 유형, 2 cpu 1 Rem, 30 Gib
             - 메모리 증설 -> 스왑메모리 4G 증가 처리
     - deploy.yml
         - ci/cd 설정 파일 업그레이드
